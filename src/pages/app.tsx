@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Header from '../components/organisms/Header/Header';
 
 import { axiosClient } from '../config/axios';
 import { setUserAuth } from '../context/actions/user.actions';
@@ -27,12 +28,12 @@ const app = () => {
   });
 
   return isAuthenticate ? (
-    <div>
-      <h1>asdfa</h1>
+    <>
+      <Header />
       <button onClick={() => dispatch(setUserAuth(false))}>
         Cerrar sesión
       </button>
-    </div>
+    </>
   ) : (
     <Login />
   );

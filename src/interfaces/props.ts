@@ -4,7 +4,11 @@ export interface LayoutProps {
   children: ReactNode;
 }
 
-export interface TextProps {
+export interface TextProps
+  extends React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLParagraphElement>,
+    HTMLParagraphElement
+  > {
   children: ReactNode;
   type: 'desc' | 'main';
   size?: string;
@@ -32,6 +36,11 @@ export interface FormGroupProps
   children: ReactNode;
   label?: string;
   htmlFor?: string;
+}
+
+export interface NavOptionsProps {
+  name: string;
+  label: string;
 }
 
 export interface ButtonSubmitProps
