@@ -3,9 +3,9 @@ import { NavOptionsProps } from '../../../interfaces/props';
 import Text from '../Text/Text';
 import { NavOptionDiv } from './NavOption.styles';
 
-const NavOption = ({ name, label }: NavOptionsProps) => {
+const NavOption = ({ name, label, ...rest }: NavOptionsProps) => {
   return (
-    <NavOptionDiv>
+    <NavOptionDiv {...rest}>
       <img src={`/static/icons/nav/${name}.webp`} alt={`${name} icon`} />
       <Text
         type="main"

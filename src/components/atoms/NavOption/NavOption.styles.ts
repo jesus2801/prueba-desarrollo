@@ -5,7 +5,7 @@ export const NavOptionDiv = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-right: 25px;
+  margin-right: 30px;
 
   cursor: pointer;
 
@@ -17,5 +17,10 @@ export const NavOptionDiv = styled.div`
   img {
     width: 50px;
     margin-bottom: 4px;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
   }
 `;

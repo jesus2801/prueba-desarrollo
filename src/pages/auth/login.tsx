@@ -6,7 +6,7 @@ import H from '../../components/atoms/H/H';
 import Input from '../../components/atoms/Input/Input';
 import FormGroup from '../../components/molecules/FormGroup/FormGroup';
 import { axiosClient } from '../../config/axios';
-import { authToken, showError } from '../../functions';
+import { authToken, handleLoading, showError } from '../../functions';
 import { isEmpty, isEmail } from '../../functions/validate';
 import { AuthForm } from '../../styles/pages/auth';
 
@@ -48,9 +48,12 @@ const login = () => {
     }
 
     try {
+      handleLoading(true);
       const response = await axiosClient.post('/auth/login', data);
       localStorage.setItem('token', response.data.token);
       authToken(response.data.token);
+
+      handleLoading(false);
 
       router.push('/app');
     } catch (e) {
@@ -64,7 +67,7 @@ const login = () => {
 
   return (
     <AuthForm onSubmit={handleSubmit}>
-      <H type="h1" uppercase={true}>
+      <H type="h1" uppercase={true} size="30px">
         Bienvenido
       </H>
 

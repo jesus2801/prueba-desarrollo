@@ -1,10 +1,12 @@
+import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import ButtonSubmit from '../../components/atoms/ButtonSubmit/ButtonSubmit';
 import H from '../../components/atoms/H/H';
 import Input from '../../components/atoms/Input/Input';
 import FormGroup from '../../components/molecules/FormGroup/FormGroup';
-import { showError } from '../../functions';
+import { axiosClient } from '../../config/axios';
+import { authToken, showError } from '../../functions';
 import { isEmail, isEmpty } from '../../functions/validate';
 import { AuthForm } from '../../styles/pages/auth';
 
@@ -17,6 +19,8 @@ const signup = () => {
 
   const { mail, pass, pass2 } = data;
 
+  const router = useRouter();
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setData({
       ...data,
@@ -24,7 +28,7 @@ const signup = () => {
     });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (isEmpty(mail, pass, pass2)) {
@@ -49,12 +53,27 @@ const signup = () => {
       return;
     }
 
-    //comunicarme con nodejs
+    try {
+      const response = await axiosClient.post('/auth/signup', {
+        mail,
+        pass,
+      });
+      localStorage.setItem('token', response.data.token);
+      authToken(response.data.token);
+
+      router.push('/app');
+    } catch (e) {
+      if (e.response.status === 400) {
+        showError(e.response.data.errors[0].msg);
+        return;
+      }
+      showError('Lo sentimos ha ocurrido un error, intente más tarde');
+    }
   };
 
   return (
     <AuthForm onSubmit={handleSubmit}>
-      <H type="h1" uppercase={true}>
+      <H type="h1" uppercase={true} size="30px">
         Bienvenido
       </H>
       <FormGroup label="Email:" htmlFor="mail">

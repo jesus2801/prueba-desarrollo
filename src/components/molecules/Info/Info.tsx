@@ -9,14 +9,16 @@ import { InfoDiv } from './Info.styles';
 const Info = () => {
   return (
     <InfoDiv>
-      <H type="h1" uppercase={true}>
+      <H type="h1" uppercase={true} size="35px">
         Prueba de desarrollo
       </H>
       <Text type="main" margin="0 0 20px 0">
         Prueba de desarrollo para la empresa SORAERP, producida y probada
         por mi persona Jesús García. Aplicativo que conciste en abarcar
         estadisticas, relaciones y diferentes acciones sobre datos
-        almacenados por el usuario
+        almacenados por el usuario, construida con SSR(React y NextJS),
+        Redux, Hooks, Typescript, Testing con Jest y Enzyme, Atomic
+        Design, Sass, etc.
       </Text>
       <div className="buttons">
         <Link href="/auth/login">

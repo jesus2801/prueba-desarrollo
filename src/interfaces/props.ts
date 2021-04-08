@@ -1,4 +1,5 @@
 import { ReactNode, DetailedHTMLProps } from 'react';
+import { FileInfo } from './context';
 
 export interface LayoutProps {
   children: ReactNode;
@@ -21,7 +22,11 @@ export interface SmallButtonProps {
   margin: string;
 }
 
-export interface HProps {
+export interface HProps
+  extends DetailedHTMLProps<
+    React.HTMLAttributes<HTMLHeadingElement>,
+    HTMLHeadingElement
+  > {
   type: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   children: ReactNode;
   size?: string;
@@ -38,9 +43,34 @@ export interface FormGroupProps
   htmlFor?: string;
 }
 
-export interface NavOptionsProps {
+export interface NavOptionsProps
+  extends DetailedHTMLProps<
+    React.HTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
+  > {
   name: string;
   label: string;
+}
+
+export interface SelectProps
+  extends DetailedHTMLProps<
+    React.SelectHTMLAttributes<HTMLSelectElement>,
+    HTMLSelectElement
+  > {
+  children: ReactNode;
+  minWidth: string;
+  width?: string;
+}
+
+export interface PopupFormProps {
+  data: string;
+  show: boolean;
+  setShow: (state: boolean) => void;
+  setData: (data: string) => void;
+}
+
+export interface FileLiProps {
+  data: FileInfo;
 }
 
 export interface ButtonSubmitProps
