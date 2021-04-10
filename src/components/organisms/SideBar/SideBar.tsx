@@ -20,6 +20,8 @@ const SideBar = () => {
           dispatch(setData(parseInt(e.currentTarget.value)));
         }}
       />
+
+      <img src="/static/images/soraerp.png" alt="soraerp icono" />
     </SideBarDiv>
   );
 };

@@ -8,7 +8,7 @@ export const SideBarDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
 
   width: 270px;
   min-width: 270px;
@@ -21,9 +21,8 @@ export const SideBarDiv = styled.div`
 
   overflow: hidden;
 
-  object {
-    margin-top: 60px;
-    width: 140px;
+  img {
+    width: 100%;
   }
 
   .m-bottom {

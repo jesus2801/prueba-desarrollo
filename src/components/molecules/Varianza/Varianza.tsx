@@ -53,13 +53,13 @@ Chart.register(
   Tooltip
 );
 
-const Employees = () => {
-  const { employees } = useSelector((state: AppCtx) => state.files);
+const Varianza = () => {
+  const { sales } = useSelector((state: AppCtx) => state.files);
 
   useEffect(() => {
-    if (employees.length !== 0) {
+    if (sales.length !== 0) {
       const oldCanvas = document.getElementById(
-        'chart-employees'
+        'chart-varianza'
       ) as HTMLCanvasElement;
 
       if (oldCanvas) {
@@ -67,43 +67,48 @@ const Employees = () => {
       }
 
       const newCanvas = document.createElement('canvas');
-      newCanvas.id = 'chart-employees';
+      newCanvas.id = 'chart-varianza';
 
       const ctx = document
-        .getElementById('canva-employees')!
+        .getElementById('canva-varianza')!
         .appendChild(newCanvas);
 
       //----
 
-      const latestEmployees = employees.slice(employees.length - 20);
+      const muestraPrecios: number[] = sales.map(s => s.price);
 
-      const labels = latestEmployees.map(e => e.name);
+      const promedioVentas: number =
+        muestraPrecios.reduce((a, b) => a + b) / muestraPrecios.length;
 
-      const ages = latestEmployees.map(e => e.age);
+      const varianzaVentas = muestraPrecios.map(p => p - promedioVentas);
 
-      //@ts-ignore
-      const average = employees.reduce((a, b) => ({
-        age: a.age + b.age,
-      }));
+      //----------
+
+      const muestraCostos: number[] = sales.map(s => s.cost);
+
+      const PromedioCostos: number =
+        muestraCostos.reduce((a, b) => a + b) / muestraCostos.length;
+
+      const varianzaCostos = muestraCostos.map(p => p - PromedioCostos);
 
       new Chart(ctx!, {
         type: 'line',
         data: {
-          labels: labels,
+          labels: muestraPrecios,
           datasets: [
             {
-              label: 'Edades últimos 20 empleados',
-              data: ages,
+              label: 'Varianza de precios',
+              data: varianzaVentas,
               fill: false,
-              borderColor: 'rgb(75, 192, 192)',
-              tension: 0.1,
+              borderColor: 'rgb(106, 75, 192)',
+              tension: 0.4,
             },
             {
-              label: 'Promedio edades empleados',
-              data: new Array(20).fill(average.age / employees.length),
+              label: 'Varianza de costos',
+              data: varianzaCostos,
               fill: false,
-              borderColor: 'rgb(130, 75, 192)',
-              tension: 0.1,
+              borderColor: 'rgb(75, 169, 192)',
+              tension: 0.4,
             },
           ],
         },
@@ -111,9 +116,9 @@ const Employees = () => {
 
       //----
     }
-  }, [employees]);
+  }, [sales]);
 
-  return <div id="canva-employees" className="employees"></div>;
+  return <div id="canva-varianza" className="employees"></div>;
 };
 
-export default Employees;
+export default Varianza;

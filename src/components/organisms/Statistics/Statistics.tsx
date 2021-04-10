@@ -8,11 +8,15 @@ import AverageAges from '../../molecules/AverageAges/AverageAges';
 import AverageCost from '../../molecules/AverageCost/AverageCost';
 import ClientsConcurrence from '../../molecules/ClientsConcurrence/ClientsConcurrence';
 import ClientsCosts from '../../molecules/ClientsCosts/ClientsCosts';
+import DesviacionEstandar from '../../molecules/DesviacionEstandar/DesviacionEstandar';
 import Employees from '../../molecules/Employees/Employees';
 import EmployeesPosition from '../../molecules/EmployeesPosition/EmployeesPosition';
 import FirstChart from '../../molecules/FirstChart/FirstChart';
 import FourthChart from '../../molecules/FourthChart/FourthChart';
 import SalesLine from '../../molecules/SalesLine/SalesLine';
+import TendenciaCentral from '../../molecules/TendenciaCentral/TendenciaCentral';
+import TendenciaCostos from '../../molecules/TendenciaCostos/TendenciaCostos';
+import Varianza from '../../molecules/Varianza/Varianza';
 import EmployeeTable from '../EmployeesTable/EmployeesTable';
 import SalesTable from '../SalesTable/SalesTable';
 
@@ -52,6 +56,13 @@ const Statistics = () => {
 
         <ClientsConcurrence />
         <ClientsCosts />
+
+        <DesviacionEstandar />
+
+        <TendenciaCentral />
+        <TendenciaCostos />
+
+        <Varianza />
 
         <SalesTable />
 
